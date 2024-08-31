@@ -19,14 +19,19 @@ int main()
 
         vector <int> a(n), b(n);
 
-        for (int& x : a) cin >> x;
-        for (int& x : b) cin >> x;
+        for (int& num : a) cin >> num;
+        for (int& num : b) cin >> num;
 
-        bool alice = 0;
+        bool bob = (a == b);
 
-        if (n > 2) alice = (a != b);
+        if (not bob)
+        {
+            reverse(begin(a), end(a));
 
-        cout << (alice ? "Alice\n" : "Bob\n");
+            bob = (a == b);
+        }
+
+        cout << (not bob ? "Alice\n" : "Bob\n");
     }
 
     return 0;

@@ -17,9 +17,14 @@ int main()
     {
         cin >> n >> m;
 
-        vector <long long> nums(n);
+        long long num, maxi = 0;
 
-        for (long long& num : nums) cin >> num;
+        for (int x = 0; x < n; x ++)
+        {
+            cin >> num;
+
+            maxi = max(maxi, num);
+        }
 
         char c;
 
@@ -28,7 +33,13 @@ int main()
         while (m --)
         {
             cin >> c >> l >> r;
+
+            if (maxi >= l and maxi <= r) maxi += (c == '-' ? (-1) : 1);
+
+            cout << (maxi) << " ";
         }
+
+        cout << "\n";
     }
 
     return 0;
