@@ -41,22 +41,21 @@ int main()
         for (long long& num : nums)
         {
             cin >> num;
-
-            sum = ((sum + num) % MOD);
+            sum += num;
         }
 
-        long long p = 0, q = (((n - 1) * 1LL * n) >> 1);
+        long long p = 0, q = ((((n - 1) * 1LL * n) >> 1) % MOD);
 
         for (long long& num : nums)
         {
             sum -= num;
-            p += (num * sum);
+            p += (num * (sum % MOD));
             p %= MOD;
         }
 
         long long qInv = modExp(q, MOD - 2);
 
-        cout << ((((p * qInv) % MOD) + MOD) % MOD) << "\n";
+        cout << (((p % MOD) * (qInv % MOD)) % MOD) << "\n";
     }
 
     return 0;
