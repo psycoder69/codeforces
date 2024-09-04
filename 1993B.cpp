@@ -17,45 +17,38 @@ int main()
     {
         cin >> n;
 
-        priority_queue <long long int> odd;
+        vector <int> nums(n);
 
-        priority_queue <long long int, vector <long long int>, greater <long long int>> even;
+        long long int maxOdd = 0, even = 0;
 
-        long long int x = 0, e = 0;
-
-        for (int i = 0; i < n; i ++)
+        for (int& num : nums)
         {
-            cin >> x;
+            cin >> num;
 
-            if (x & 1) odd.push(x);
-            else
-            {
-                e = max(e, x);
-                even.push(x);
-            }
+            if (num & 1) maxOdd = max(maxOdd, num * 1LL); else even ++;
         }
 
         int oper = 0;
 
-        if (not odd.empty())
+        if (maxOdd and even)
         {
-            while (not even.empty())
+            sort(begin(nums), end(nums));
+
+            bool flag = 0;
+
+            for (int& num : nums)
             {
-                if (odd.top() > even.top())
+                if (not (num & 1))
                 {
-                    odd.push(odd.top() + even.top());
-                    even.pop();
-                }
-                else
-                {
-                    x = (odd.top() + e);
-                    odd.pop();
+                    oper ++;
 
-                    odd.push(x);
-                }
+                    if (maxOdd < num) flag = 1;
 
-                oper ++;
+                    maxOdd += num;
+                }
             }
+
+            oper += flag;
         }
 
         cout << (oper) << "\n";
